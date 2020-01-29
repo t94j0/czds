@@ -16,17 +16,27 @@ type DownloadInfo struct {
 	Filename      string
 }
 
-// DownloadZoneToWriter is analogus to DownloadZone but instead of writing it to a file, it will
-// write it to a provided io.Writer. It returns the number of bytes written to dest and any error
-// that was encountered.
-func (c *Client) DownloadZoneToWriter(url string, dest io.Writer) (int64, error) {
+// DownloadZoneToReader ...
+func (c *Client) DownloadZoneToReader(url string) (io.ReadCloser, error) {
 	resp, err := c.apiRequest(true, "GET", url, nil)
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
 	defer resp.Body.Close()
 
-	return io.Copy(dest, resp.Body)
+	return resp.Body, nil
+}
+
+// DownloadZoneToWriter is analogus to DownloadZone but instead of writing it to a file, it will
+// write it to a provided io.Writer. It returns the number of bytes written to dest and any error
+// that was encountered.
+func (c *Client) DownloadZoneToWriter(url string, w io.Writer) (uint64, error) {
+	r, err := c.DownloadZoneToReader(url)
+	if err != nil {
+		return 0, err
+	}
+	defer r.Close()
+	return io.Copy(w, r)
 }
 
 // DownloadZone provided the zone download URL retrieved from GetLinks() downloads the zone file and

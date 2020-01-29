@@ -30,7 +30,7 @@ func (c *Client) DownloadZoneToReader(url string) (io.ReadCloser, error) {
 // DownloadZoneToWriter is analogus to DownloadZone but instead of writing it to a file, it will
 // write it to a provided io.Writer. It returns the number of bytes written to dest and any error
 // that was encountered.
-func (c *Client) DownloadZoneToWriter(url string, w io.Writer) (uint64, error) {
+func (c *Client) DownloadZoneToWriter(url string, w io.Writer) (int64, error) {
 	r, err := c.DownloadZoneToReader(url)
 	if err != nil {
 		return 0, err

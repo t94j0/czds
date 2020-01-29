@@ -22,7 +22,6 @@ func (c *Client) DownloadZoneToReader(url string) (io.ReadCloser, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
 
 	return resp.Body, nil
 }

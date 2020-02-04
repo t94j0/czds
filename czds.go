@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lanrat/czds/jwt"
+	"github.com/t94j0/czds/jwt"
 )
 
 const (

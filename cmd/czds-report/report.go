@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/lanrat/czds"
+	"github.com/t94j0/czds"
 )
 
 var (

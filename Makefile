@@ -19,7 +19,7 @@ $(BINS): $$(BIN_SOURCES) $(MODULE_SOURCES)
 $(CMDS): $$(CMD_TARGETS)
 
 docker: Dockerfile $(SOURCES)
-	docker build -t lanrat/czds .
+	docker build -t t94j0/czds .
 
 deps: go.mod
 	go mod download
